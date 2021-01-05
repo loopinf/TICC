@@ -135,8 +135,8 @@ def computeF1Score_delete(num_cluster, matching_algo, actual_clusters, threshold
                 else:
                     FN += 1.0
         precision = (TP)/(TP + FP)
-        print("cluster #", cluster)
-        print("TP,TN,FP,FN---------->", (TP, TN, FP, FN))
+        print(("cluster #", cluster))
+        print(("TP,TN,FP,FN---------->", (TP, TN, FP, FN)))
         recall = TP/(TP + FN)
         f1 = (2*precision*recall)/(precision + recall)
         F1_score[cluster] = f1
@@ -190,7 +190,7 @@ def computeBIC(K, T, clustered_points, inverse_covariances, empirical_covariance
     
     threshold = 2e-5
     clusterParams = {}
-    for cluster, clusterInverse in inverse_covariances.items():
+    for cluster, clusterInverse in list(inverse_covariances.items()):
         mod_lle += np.log(np.linalg.det(clusterInverse)) - np.trace(np.dot(empirical_covariances[cluster], clusterInverse))
         clusterParams[cluster] = np.sum(np.abs(clusterInverse) > threshold)
     curr_val = -1
